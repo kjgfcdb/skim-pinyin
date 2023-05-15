@@ -26,6 +26,12 @@ cd $(skim-pinyin -d)
 vim $(skim-pinyin -m)
 ```
 
+# Scripts
+
+Check `scripts` for details
+
+* `fp.fish`: Add `fp` command in fish shell to launch `vim`, `cd` or `rm` with skim-pinyin
+
 # Powered by
 
 * [skim](https://github.com/lotabout/skim)
