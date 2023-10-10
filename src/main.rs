@@ -23,13 +23,13 @@ fn to_pinyin(path: &str) -> String {
 
 impl SkimItem for PinyinItem {
     fn text(&self) -> Cow<str> {
-        Cow::Owned(to_pinyin(&self.inner))
+        Cow::from(to_pinyin(&self.inner))
     }
     fn display<'a>(&'a self, _context: DisplayContext<'a>) -> AnsiString<'a> {
         AnsiString::parse(&self.inner)
     }
     fn output(&self) -> Cow<str> {
-        Cow::Borrowed(&self.inner)
+        Cow::from(&self.inner)
     }
 }
 
@@ -78,8 +78,14 @@ pub fn main() {
         .unwrap();
 
     let selected_items = Skim::run_with(&options, Some(rx_item))
-        .map(|out| out.selected_items)
-        .unwrap_or_else(Vec::new);
+        .map(|out| {
+            if out.is_abort {
+                Vec::new()
+            } else {
+                out.selected_items
+            }
+        })
+        .unwrap();
 
     for item in selected_items.iter() {
         println!("{}", item.output());
