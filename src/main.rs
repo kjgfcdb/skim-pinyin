@@ -72,20 +72,13 @@ pub fn main() {
     drop(tx_item); // so that skim could know when to stop waiting for more items.
 
     let options = SkimOptionsBuilder::default()
-        .height(Some("50%"))
         .multi(cli.multi)
         .build()
         .unwrap();
 
     let selected_items = Skim::run_with(&options, Some(rx_item))
-        .map(|out| {
-            if out.is_abort {
-                Vec::new()
-            } else {
-                out.selected_items
-            }
-        })
-        .unwrap();
+        .map(|out| out.selected_items)
+        .unwrap_or_else(|| Vec::new());
 
     for item in selected_items.iter() {
         println!("{}", item.output());
