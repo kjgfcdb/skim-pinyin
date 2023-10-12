@@ -1,5 +1,6 @@
 [package]
 name = "skim-pinyin"
+authors = ["Dengbo Chen <kjgfcdb@126.com>"]
 version = "0.1.0"
 edition = "2021"
 description = "A tool for searching current dir with fuzzy pinyin power"
@@ -8,7 +9,7 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-skim = "*"
+skim = "0.10.4"
 pinyin = "0.9"
 clap = { version = "4.2.7", features = ["derive"] }
 
