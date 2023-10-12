@@ -5,8 +5,14 @@ function fp
         return 1
     end
     if test "$argv[1]" = "cd"
-        builtin cd (skim-pinyin -d)
+        set dir (skim-pinyin -d)
+        if test -n "$dir"
+            builtin cd $dir
+        end
     else
-        $argv[1..-1] (skim-pinyin -m)
+        set files (skim-pinyin -m)
+        if test -n "$files"
+            $argv[1..-1] $files
+        end
     end
 end
