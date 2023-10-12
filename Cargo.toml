@@ -11,3 +11,7 @@ license = "MIT"
 skim = "*"
 pinyin = "0.9"
 clap = { version = "4.2.7", features = ["derive"] }
+
+[[bin]]
+name = "skim-pinyin"
+path = "src/main.rs"
